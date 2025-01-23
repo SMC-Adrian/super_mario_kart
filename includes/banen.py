@@ -1,4 +1,8 @@
 import pygame
+GROEN = (44, 122, 44)
+GRIJS = (79, 79, 79)
+WIT = (255, 255, 255)
+
 def Grasslands():
     screen_info = pygame.display.Info()
     screen_width = 1366
@@ -6,9 +10,6 @@ def Grasslands():
     
     screen = pygame.display.set_mode((screen_width, screen_height))
     
-    GROEN = (44, 122, 44)
-    GRIJS = (79, 79, 79)
-    WIT = (255, 255, 255)
     screen.fill(GROEN)
     
     pygame.draw.rect(screen, GRIJS, (230, 64, 883, 100)) #BREEDTE, HOOGTE, LENGTE, BREEDTE
@@ -37,7 +38,9 @@ def Grasslands():
     
     pygame.display.update()
 
-def baan(screen=pygame.display.set_mode((1280, 720))):
+def baan1(screen=pygame.display.set_mode((1280, 720))):
+    screen.fill(GROEN)
+
     pygame.draw.rect(screen, GRIJS, (230, 64, 883, 100)) #BREEDTE, HOOGTE, LENGTE, BREEDTE
     pygame.draw.circle(screen, GRIJS, (1113, 215), 150, width=0, draw_top_right=True, draw_top_left=False, draw_bottom_left=False, draw_bottom_right=True)
     pygame.draw.circle(screen, GROEN, (1113, 215), 50, width=0, draw_top_right=True, draw_top_left=False, draw_bottom_left=False, draw_bottom_right=True)

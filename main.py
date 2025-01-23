@@ -1,6 +1,6 @@
 import pygame 
 import sys
-import banen
+from includes.banen import *
 
 # initialiseer pygame
 pygame.init()
@@ -11,9 +11,13 @@ screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
 pygame.display.set_caption("Super Mario Kart - PO Informatica")
 
 # maak variabelen voor kleuren
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-GREEN = (0, 175, 0)
+WIT = (255, 255, 255)
+ZWART = (0, 0, 0)
+GROEN = (0, 175, 0)
+GRIJS = (79, 79, 79)
+LICHTBLAUW = (108, 217, 213)
+DONKERBLAUW = (21, 27, 56)
+
 
 # laad afbeeldingen
 loadingscreen = pygame.image.load(r"img/loadingscreen_16_9.jpg")
@@ -44,8 +48,8 @@ while True:
             pygame.quit()
             sys.exit()
     # achtergrond is groen
-    screen.fill(GREEN)
-    banen.baan()
+    screen.fill(GROEN)
+    baan1()
     pygame.display.update()
 
 pygame.quit()
