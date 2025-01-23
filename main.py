@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+import banen
 
 # initialiseer pygame
 pg.init()
@@ -44,7 +45,7 @@ while True:
             sys.exit()
     # achtergrond is groen
     screen.fill(GREEN)
-
+    banen.baan()
     pg.display.update()
 
 pg.quit()
