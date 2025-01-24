@@ -38,7 +38,7 @@ def Grasslands():
     
     pygame.display.update()
 
-def baan1(screen=pygame.display.set_mode((1280, 720))):
+def baan1(screen=pygame.display.set_mode((1280, 720)))->None:
     screen.fill(GROEN)
 
     pygame.draw.rect(screen, GRIJS, (230, 64, 883, 100)) #BREEDTE, HOOGTE, LENGTE, BREEDTE

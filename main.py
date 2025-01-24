@@ -20,7 +20,11 @@ DONKERBLAUW = (21, 27, 56)
 
 
 # laad afbeeldingen
-loadingscreen = pygame.image.load(r"img/loadingscreen_16_9.jpg")
+loadingscreen = pygame.image.load(r"img/loadingscreen_16_9.jpg") # deze afbeelding is door chatgpt gegenereed met de prompts: generate a image for the front of a small 2d racing game without any text using pixelart - Verbeeld an image in this style with 1280 by 720 pixels - only make a loadingscreen without side bars
+car1 = pygame.image.load(r"img/car1.webp")
+
+
+
 
 
 # beginscherm loop
@@ -49,7 +53,14 @@ while True:
             sys.exit()
     # achtergrond is groen
     screen.fill(GROEN)
+    # teken de baan uit banen.py
     baan1()
+    # screen.blit(car1, (100, 100))   
+
+
+
+
+
     pygame.display.update()
 
 pygame.quit()
