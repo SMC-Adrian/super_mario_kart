@@ -41,7 +41,7 @@ def Grasslands():
 def baan1(screen=pygame.display.set_mode((1280, 720)))->None:
     screen.fill(GROEN)
 
-    pygame.draw.rect(screen, GRIJS, (230, 64, 883, 100)) #BREEDTE, HOOGTE, LENGTE, BREEDTE
+    pygame.draw.rect(screen, GRIJS, (230, 64, 883, 100)) #afstand van links, afstand van boven, breedte, hoogte
     pygame.draw.circle(screen, GRIJS, (1113, 215), 150, width=0, draw_top_right=True, draw_top_left=False, draw_bottom_left=False, draw_bottom_right=True)
     pygame.draw.circle(screen, GROEN, (1113, 215), 50, width=0, draw_top_right=True, draw_top_left=False, draw_bottom_left=False, draw_bottom_right=True)
     pygame.draw.rect(screen, GRIJS, (913, 265, 200, 100))

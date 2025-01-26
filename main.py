@@ -18,18 +18,43 @@ GRIJS = (79, 79, 79)
 LICHTBLAUW = (108, 217, 213)
 DONKERBLAUW = (21, 27, 56)
 
+FPS = 30
 
 # laad afbeeldingen
 loadingscreen = pygame.image.load(r"img/loadingscreen_16_9.jpg") # deze afbeelding is door chatgpt gegenereed met de prompts: generate a image for the front of a small 2d racing game without any text using pixelart - Verbeeld an image in this style with 1280 by 720 pixels - only make a loadingscreen without side bars
 car1 = pygame.image.load(r"img/car1.webp")
 
+# classes
+class auto:
+    def __init__(self, x: int=0, y: int=0, grootte: int=10):
+        self.x: int = x
+        self.y: int = y
+        # pygame.draw.rect(screen, DONKERBLAUW, (x, y, grootte, grootte))
+    
+    def get_center():
+        pass
 
-
-
+    def horizontaal(self, snelheid):
+        '''
+        verplaats de auto horizontaal met het aantal pixels van snelheid
+        '''
+        self.x = self.x + snelheid
+    
+    def verticaal(self, snelheid):
+        '''
+        verplaats de auto verticaal met het aantal pixels van snelheid
+        '''
+        self.y = self.y + snelheid
+        
+# functies
+def checkpoints_baan1():
+    pygame.draw.rect(screen, WIT, (500, 50, 10, 130))
 
 # beginscherm loop
 beginscherm = True
+clock = pygame.time.Clock()
 while beginscherm:
+    # set ticks
     for event in pygame.event.get():
         # sluit de game af als er op het kruisje wordt geklikt
         if event.type == pygame.QUIT:
@@ -46,15 +71,14 @@ while beginscherm:
     pygame.display.update()
 
 while True:
-    for event in pygame.event.get():
-        # sluit de game af als er op het kruisje wordt geklikt
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    # zorgt dat de game niet sneller dan 30 keer per seconden loopt
+    clock.tick(FPS)
     # achtergrond is groen
     screen.fill(GROEN)
     # teken de baan uit banen.py
     baan1()
+    checkpoints_baan1()
+    pygame.draw.rect(screen, DONKERBLAUW, (10, 100, 40, 40))
     # screen.blit(car1, (100, 100))   
 
 
@@ -63,5 +87,10 @@ while True:
 
     pygame.display.update()
 
+    for event in pygame.event.get():
+        # sluit de game af als er op het kruisje wordt geklikt
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 pygame.quit()
 sys.exit()
