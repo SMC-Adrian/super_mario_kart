@@ -5,7 +5,7 @@ Informatica PO st. Michael College 2025 game maken. Door Adrian, Abe en Olle
 ```
 git clone https://github.com/SMC-Adrian/super_mario_kart.git
 ```
-## importeer pygame: 
+## Importeer PyGame: 
 Win + R
 ```
 powershell pip install pygame
