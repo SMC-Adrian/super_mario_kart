@@ -60,8 +60,8 @@ class auto:
         '''
         self.img = scale_image(image, 0.7)
         self.max_snelheid = max_snelheid
-        self.snelheid = 10
-        self.versnelling = 2
+        self.snelheid = 0
+        self.versnelling = 1
         self.draaisnelheid = draaisnelheid
         self.hoek = -90
         self.x, self.y = start_x, start_y
@@ -86,13 +86,22 @@ class auto:
         Deze functie neemt berekent de nieuwe snelheid van de auto en neemt die of de maximale snelheid
         daarna verplaatst hij de auto met een mooie formule van het internet
         '''
-        self.snelheid = min(self.snelheid + self.versnelling, self.snelheid)
+        self.snelheid = min(self.snelheid + self.versnelling, self.max_snelheid)
 
         radialen = math.radians(self.hoek)
         verticaal = math.cos(radialen) * self.snelheid
         horizontaal = math.sin(radialen) * self.snelheid
         self.y -= verticaal
         self.x -= horizontaal
+
+    def achter_auto(self):
+        self.snelheid = max(self.snelheid + self.versnelling, self.max_snelheid)
+
+        radialen = math.radians(self.hoek)
+        verticaal = math.cos(radialen) * self.snelheid
+        horizontaal = math.sin(radialen) * self.snelheid
+        self.y += verticaal
+        self.x += horizontaal
 
 # beginscherm loop
 beginscherm = True
@@ -134,16 +143,21 @@ while True:
     '''
     if keys[pygame.K_w]:
         rode_auto.voren_auto()
+    if keys[pygame.K_s]:
+        rode_auto.achter_auto()
     if keys[pygame.K_d]:
         rode_auto.draai_auto(rechts=True)
     if keys[pygame.K_a]:
         rode_auto.draai_auto(links=True)
     if keys[pygame.K_UP]:
         grijze_auto.voren_auto()
+    if keys[pygame.K_DOWN]:
+        grijze_auto.achter_auto()
     if keys[pygame.K_LEFT]:
         grijze_auto.draai_auto(links=True)
     if keys[pygame.K_RIGHT]:
         grijze_auto.draai_auto(rechts=True)
+    
 
     pygame.display.update()
 
