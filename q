@@ -1,0 +1,125 @@
+[33mcommit 8ef63d34e4c63295ec9183ffb73dbac23bdd82b8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Mon Jan 27 08:57:09 2025 +0100
+
+    Update README.md
+
+[33mcommit cfe46cb605beb9e5a9989e3ff2b646988fbfb279[m
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Mon Jan 27 08:56:30 2025 +0100
+
+    Update README.md
+
+[33mcommit 21bb804ce550687a3d6ccc8a43e79aec9af8db1b[m
+Author: Adrian Bleeker <204091@stmichaelcollege.nl>
+Date:   Fri Jan 24 13:30:02 2025 +0100
+
+    add car 1
+
+[33mcommit 7358d107da54e313f9087b6b7ac23ac52222ba56[m
+Merge: af17de9 81c7abc
+Author: Adrian Bleeker <204091@stmichaelcollege.nl>
+Date:   Thu Jan 23 12:07:23 2025 +0100
+
+    kleine aanpassingen
+
+[33mcommit af17de99a4ab3c44181b3d45208406d3c3da3032[m
+Author: Adrian Bleeker <204091@stmichaelcollege.nl>
+Date:   Thu Jan 23 11:29:39 2025 +0100
+
+    replace pg to pygame
+
+[33mcommit 81c7abc3039f814451a14e7112ed95278318f259[m
+Author: Adrian Bleeker <204091@stmichaelcollege.nl>
+Date:   Thu Jan 23 11:29:39 2025 +0100
+
+    replace pg to pygame
+
+[33mcommit a122a4580ee4f206d0bef4afffb220e517b6a019[m
+Author: Olle-Git <186268069+Olle-Git@users.noreply.github.com>
+Date:   Thu Jan 23 09:37:30 2025 +0100
+
+    Desert Map Functie v1
+    
+    De desert map eerste versie, het donkerbruine gedeelte wordt het "offroad" gedeelte. Nog 1 map en dan worden alle maps mooi opgemaakt en volgen er checkpoints
+
+[33mcommit 5c755da266f8d445a98c088984f9e7fc0e31f699[m
+Author: Olle-Git <186268069+Olle-Git@users.noreply.github.com>
+Date:   Thu Jan 23 08:46:32 2025 +0100
+
+    City Map Functie v1
+    
+    Eerste versie city map, grijs is de baan, bruin is een treinspoor (komt later nog een trein op heen en weer)
+
+[33mcommit 8cb14926366801f424dad8650c61c139c268dff2[m
+Author: Olle-Git <186268069+Olle-Git@users.noreply.github.com>
+Date:   Wed Jan 22 18:51:07 2025 +0100
+
+    Ice Map
+    
+    Eerste versie ice map
+
+[33mcommit e9fc0fbb8f06266a55cf4b84fa69b4adb93a9f35[m
+Author: Olle-Git <186268069+Olle-Git@users.noreply.github.com>
+Date:   Wed Jan 22 13:36:33 2025 +0100
+
+    Include map & Grasslands wereld
+    
+    Include map voor functies voor het inladen van de werelden, en de eerste versie van de grasslands wereld toegevoeg
+
+[33mcommit 169277debf990c10d78940606488f11f4fcc0862[m
+Author: Adrian Bleeker <204091@stmichaelcollege.nl>
+Date:   Wed Jan 22 13:29:00 2025 +0100
+
+    achtergrondafbeelding voor laadscherm toegevoegt
+
+[33mcommit 8d68855e1f961931f76fc3baa90ae3fdbcddecb4[m
+Author: Adrian Bleeker <204091@stmichaelcollege.nl>
+Date:   Wed Jan 22 11:40:05 2025 +0100
+
+    main page
+
+[33mcommit 3f0553d9581ba22fb920329821c73d9365c1a30b[m
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Tue Jan 21 14:07:48 2025 +0100
+
+    Create includes and img folder
+
+[33mcommit 62be82e77308c7987bf579c0263aec35ddefdb7f[m
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Tue Jan 21 14:06:17 2025 +0100
+
+    Delete includes/img
+
+[33mcommit 3fc46541c6bc7067afa507da736b3243b294e158[m
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Tue Jan 21 14:05:44 2025 +0100
+
+    Create img folder
+
+[33mcommit 08e679c4629a378c90ad8c3302f4d72f40725ba1[m
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Tue Jan 21 14:05:06 2025 +0100
+
+    Create main.py
+
+[33mcommit a094c73421aecfe9317eeb75dfccdf0a1bd07bc7[m
+Merge: 68164f6 1d3096d
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Tue Jan 21 14:03:16 2025 +0100
+
+    Merge pull request #1 from Olle-Git/patch-1
+    
+    Update README.md
+
+[33mcommit 1d3096d92f4ad71b2a7471f9687816c82bd05c80[m
+Author: Olle-Git <186268069+Olle-Git@users.noreply.github.com>
+Date:   Tue Jan 21 14:00:21 2025 +0100
+
+    Update README.md
+
+[33mcommit 68164f64c2dd6ebfac26fa2355685a7d6c3dd15b[m
+Author: SMC-Adrian <204091@stmichaelcollege.nl>
+Date:   Tue Jan 21 13:55:59 2025 +0100
+
+    Initial commit
