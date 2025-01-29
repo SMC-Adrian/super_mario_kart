@@ -10,5 +10,8 @@ Win + R
 ```
 powershell pip install pygame
 ```
+## Feedback
+[Link to feedbackformulier google docs](https://forms.gle/uuDjGH7h73bftFTA6)
 
+## Docs
 https://www.pygame.org/docs/ GA NAAR DEZE SITE VOOR ALLE FUNCTIES VAN PYGAME!!
