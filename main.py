@@ -64,47 +64,51 @@ def main():
                 if button_1.collidepoint(event.pos):
                    beginscherm = False
                    game = 1
+                   while game == 1:
+                        screen.fill(GROEN)
+                        baan1()
+                        pygame.display.update()
                 elif button_2.collidepoint(event.pos):
                     beginscherm = False
                     game = 2
+                    while game == 2:
+                        screen.fill(GEEL)
+                        pygame.display.update()
                 elif button_3.collidepoint(event.pos):
                     beginscherm = False
                     game = 3
+                    while game == 3:
+                        screen.fill(LICHTBLAUW)
+                        pygame.display.update()
                 elif button_4.collidepoint(event.pos):
                     beginscherm = False
                     game = 4
+                    while game == 4:
+                        screen.fill(GRIJS)
+                        pygame.display.update()
                 elif text1.collidepoint(event.pos):
                     beginscherm = False
                     game = 5
+                    settingscherm = True
+                    while game == 5 and settingscherm == True:
+                        screen.blit(loadingscreen, (0, 0))
+                        rect_9 = pygame.draw.rect(screen, ZWART, (20, 640, 107, 45))
+                        rect_10 = pygame.draw.rect(screen, GRIJS, (25, 645, 97, 35))
+                        text3 = screen.blit(text_3, (25, 645))
+                        pygame.display.update()
+                        for event in pygame.event.get(): 
+                            if event.type == pygame.MOUSEBUTTONDOWN:
+                                if rect_10.collidepoint(event.pos):
+                                    settingscherm = False
+                                    game = 0
+                                    beginscherm = True
+                                    pygame.display.update()
+                                    break
+                            break
                 elif text2.collidepoint(event.pos):
                     pygame.quit()
                     sys.exit()
-            break
-        
-    while game == 1:
-        screen.fill(GROEN)
-        baan1()
-        pygame.display.update()
-    while game == 2:
-        screen.fill(GEEL)
-        pygame.display.update()
-    while game == 3:
-        screen.fill(LICHTBLAUW)
-        pygame.display.update()
-    while game == 4:
-        screen.fill(GRIJS)
-        pygame.display.update()
-    while game == 5:
-        screen.blit(loadingscreen, (0, 0))
-        rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
-        rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
-        text3 = screen.blit(text_3, (1158, 645))
-        pygame.display.update()
-        for event in pygame.event.get(): 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_10.collidepoint(event.pos):
-                    game = 0
-                    beginscherm = True 
+                else:
                     break
     
     # update het scherm
