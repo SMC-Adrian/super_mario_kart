@@ -3,6 +3,7 @@ from sys import exit
 import math
 from includes.banen import *
 
+# wtf waarom werkt dit niet
 # initialiseer pygame
 pygame.init()
 
