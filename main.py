@@ -24,20 +24,19 @@ LETTERS = pygame.font.SysFont("arial", 30, bold=True, italic=False)
 
 FPS = 30
 
-# laad afbeeldingen
+# laad afbeeldingen en tekst
 loadingscreen = pygame.image.load(r"img/loadingscreen_16_9.jpg") # deze afbeelding is door chatgpt gegenereed met de prompts: generate a image for the front of a small 2d racing game without any text using pixelart - Verbeeld an image in this style with 1280 by 720 pixels - only make a loadingscreen without side bars
 car1 = pygame.image.load(r"img/car1.webp")
 rode_auto = pygame.image.load(r"img/red-car.png")
-
-# abes niet comments
-image_1 = pygame.image.load("C:\\Users\\SMC\\super_mario_kart\\grasland.jpeg").convert()
-image_2 = pygame.image.load("C:\\Users\\SMC\\super_mario_kart\\desert.jpeg").convert()
-image_3 = pygame.image.load("C:\\Users\\SMC\\super_mario_kart\\arctic.jpeg").convert()
-image_4 = pygame.image.load("C:\\Users\\SMC\\super_mario_kart\\city.jpeg").convert()
-image_5 = pygame.image.load("C:\\Users\\SMC\\super_mario_kart\\settings.jpeg").convert()
+image_1 = pygame.image.load(r"img/grasland.jpeg")
+image_2 = pygame.image.load(r"img/desert.jpeg")
+image_3 = pygame.image.load(r"img/arctic.jpeg")
+image_4 = pygame.image.load(r"img/city.jpeg")
+image_5 = pygame.image.load(r"img/settings.jpeg")
 text_1 = LETTERS.render("Settings", True, WIT)
 text_2 = LETTERS.render("Quit", True, WIT)
 text_3 = LETTERS.render("Return", True, WIT)
+
         
 # functies
 def checkpoints_baan1():
@@ -58,6 +57,81 @@ def scale_image(img, factor):
     '''
     size = round(img.get_width() * factor), round(img.get_height() * factor)
     return pygame.transform.scale(img, size)
+
+def beginscherm():
+    # plaats achtergrondafbeelding in scherm
+    screen.blit(loadingscreen, (0, 0))
+    pygame.display.update()
+    game = 0
+    beginscherm = True
+    while beginscherm == True:
+        rect_1 = pygame.draw.rect(screen, ZWART, (250.2, 95, 331, 106))
+        rect_2 = pygame.draw.rect(screen, ZWART, (698.8, 95, 331, 106))
+        rect_3 = pygame.draw.rect(screen, ZWART, (250.2, 254.8, 331, 106))
+        rect_4 = pygame.draw.rect(screen, ZWART, (698.8, 254.8, 331,106))
+        rect_5 = pygame.draw.rect(screen, ZWART, (20, 640, 127, 45))
+        rect_6 = pygame.draw.rect(screen, GRIJS, (25, 645, 117, 35))
+        rect_7 = pygame.draw.rect(screen, ZWART, (1190, 640, 70, 45))
+        rect_8 = pygame.draw.rect(screen, GRIJS, (1195, 645, 60, 35))
+        button_1 = screen.blit(image_1, (255.2, 100))
+        button_2 = screen.blit(image_2, (703.8, 100))
+        button_3 = screen.blit(image_3, (255.2, 259.8))
+        button_4 = screen.blit(image_4, (703.8, 259.8))
+        text1 = screen.blit(text_1, (25, 645))
+        text2 = screen.blit(text_2, (1195, 645))
+        pygame.display.update()
+        for event in pygame.event.get():
+            # gaat naar volgende loop als er geklikt wordt
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if button_1.collidepoint(event.pos):
+                   beginscherm = False
+                   game = 1
+                elif button_2.collidepoint(event.pos):
+                    beginscherm = False
+                    game = 2
+                elif button_3.collidepoint(event.pos):
+                    beginscherm = False
+                    game = 3
+                elif button_4.collidepoint(event.pos):
+                    beginscherm = False
+                    game = 4
+                elif text1.collidepoint(event.pos):
+                    beginscherm = False
+                    game = 5
+                elif text2.collidepoint(event.pos):
+                    pygame.quit()
+                    exit()
+            break
+        
+    while game == 1:
+        screen.fill(GROEN)
+        baan1()
+        pygame.display.update()
+    while game == 2:
+        screen.fill(GEEL)
+        pygame.display.update()
+    while game == 3:
+        screen.fill(LICHTBLAUW)
+        pygame.display.update()
+    while game == 4:
+        screen.fill(GRIJS)
+        pygame.display.update()
+    while game == 5:
+        screen.blit(loadingscreen, (0, 0))
+        rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
+        rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
+        text3 = screen.blit(text_3, (1158, 645))
+        pygame.display.update()
+        for event in pygame.event.get(): 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rect_10.collidepoint(event.pos):
+                    game = 0
+                    beginscherm = True 
+                    break
+    
+    # update het scherm
+    pygame.display.update()
+
 
 # classes
 class auto:
@@ -114,95 +188,34 @@ class auto:
         horizontaal = math.sin(radialen) * self.snelheid
         self.y += verticaal
         self.x += horizontaal
-
-# beginscherm loop
-clock = pygame.time.Clock()
-
-def beginscherm():
-    pygame.display.update()
-    game = 0
-    beginscherm = True
-    while beginscherm == True:
-        rect_1 = pygame.draw.rect(screen, ZWART, (250.2, 95, 331, 106))
-        rect_2 = pygame.draw.rect(screen, ZWART, (698.8, 95, 331, 106))
-        rect_3 = pygame.draw.rect(screen, ZWART, (250.2, 254.8, 331, 106))
-        rect_4 = pygame.draw.rect(screen, ZWART, (698.8, 254.8, 331,106))
-        rect_5 = pygame.draw.rect(screen, ZWART, (20, 640, 127, 45))
-        rect_6 = pygame.draw.rect(screen, GRIJS, (25, 645, 117, 35))
-        rect_7 = pygame.draw.rect(screen, ZWART, (1190, 640, 70, 45))
-        rect_8 = pygame.draw.rect(screen, GRIJS, (1195, 645, 60, 35))
-        button_1 = screen.blit(image_1, (255.2, 100))
-        button_2 = screen.blit(image_2, (703.8, 100))
-        button_3 = screen.blit(image_3, (255.2, 259.8))
-        button_4 = screen.blit(image_4, (703.8, 259.8))
-        text1 = screen.blit(text_1, (25, 645))
-        text2 = screen.blit(text_2, (1195, 645))
-        pygame.display.update()
-        for event in pygame.event.get():
-            # gaat naar volgende loop als er geklikt wordt
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if button_1.collidepoint(event.pos):
-                   beginscherm = False
-                   game = 1
-                elif button_2.collidepoint(event.pos):
-                    beginscherm = False
-                    game = 2
-                elif button_3.collidepoint(event.pos):
-                    beginscherm = False
-                    game = 3
-                elif button_4.collidepoint(event.pos):
-                    beginscherm = False
-                    game = 4
-                elif text1.collidepoint(event.pos):
-                    beginscherm = False
-                    game = 5
-                elif text2.collidepoint(event.pos):
-                    pygame.quit()
-                    sys.exit()
-            break
-        
-    while game == 1:
-        screen.fill(GROEN)
-        baan1()
-        pygame.display.update()
-    while game == 2:
-        screen.fill(GEEL)
-        pygame.display.update()
-    while game == 3:
-        screen.fill(LICHTBLAUW)
-        pygame.display.update()
-    while game == 4:
-        screen.fill(GRIJS)
-        pygame.display.update()
-    while game == 5:
-        screen.blit(loadingscreen, (0, 0))
-        rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
-        rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
-        text3 = screen.blit(text_3, (1158, 645))
-        pygame.display.update()
-        for event in pygame.event.get(): 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_10.collidepoint(event.pos):
-                    game = 0
-                    beginscherm = True 
-                    break
     
-    # update het scherm
-    pygame.display.update()
 
 beginscherm()
 
+# # beginscherm loop
+# beginscherm = True
+# while beginscherm:
+#     # set ticks
+#     for event in pygame.event.get():
+#         # sluit de game af als er op het kruisje wordt geklikt
+#         if event.type == pygame.QUIT:
+#             pygame.quit()
+#             exit()
+#         # gaat naar volgende loop als er geklikt wordt
+#         if event.type == pygame.MOUSEBUTTONDOWN:
+#             beginscherm = False
+#             break
+#     # plaats achtergrondafbeelding in scherm
+#     screen.blit(loadingscreen, (0, 0))
 
-    # plaats achtergrondafbeelding in scherm
-    screen.blit(loadingscreen, (0, 0))
-
-    # update het scherm
-    pygame.display.update()
-    
+#     # update het scherm
+#     pygame.display.update()
 
 
+clock = pygame.time.Clock()
 rode_auto = auto(pygame.image.load("img/red-car.png"), 100, 100, 10, 15)
 grijze_auto = auto(pygame.image.load("img/grey-car.png"), 100, 100, 10, 12)
+
 while True:
     # zorgt dat de game niet sneller dan 30 keer per seconden loopt
     clock.tick(FPS)
