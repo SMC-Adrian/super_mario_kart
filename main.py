@@ -22,6 +22,8 @@ GEEL = (255, 153, 51)
 ROOD = (255, 0, 0)
 LETTERS = pygame.font.SysFont("arial", 30, bold=True, italic=False)
 
+game = 0
+
 FPS = 30
 
 # laad afbeeldingen en tekst
@@ -62,7 +64,7 @@ def beginscherm():
     # plaats achtergrondafbeelding in scherm
     screen.blit(loadingscreen, (0, 0))
     pygame.display.update()
-    game = 0
+    global game
     beginscherm = True
     while beginscherm == True:
         rect_1 = pygame.draw.rect(screen, ZWART, (250.2, 95, 331, 106))
@@ -85,19 +87,19 @@ def beginscherm():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if button_1.collidepoint(event.pos):
                    beginscherm = False
-                   game = 1
+                   return 1
                 elif button_2.collidepoint(event.pos):
                     beginscherm = False
-                    game = 2
+                    return 2
                 elif button_3.collidepoint(event.pos):
                     beginscherm = False
-                    game = 3
+                    return 3
                 elif button_4.collidepoint(event.pos):
                     beginscherm = False
-                    game = 4
+                    return 4
                 elif text1.collidepoint(event.pos):
                     beginscherm = False
-                    game = 5
+                    return 5
                 elif text2.collidepoint(event.pos):
                     pygame.quit()
                     exit()
@@ -190,7 +192,7 @@ class auto:
         self.x += horizontaal
     
 
-beginscherm()
+game = beginscherm()
 
 # # beginscherm loop
 # beginscherm = True
