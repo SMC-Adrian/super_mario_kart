@@ -1,5 +1,3 @@
-import pygame
-import sys
 def Ice():
 
     screen_info = pygame.display.Info()  
@@ -62,7 +60,7 @@ def Ice():
         ijsblok = pygame.draw.rect(screen, LICHTBLAUW, (ijsblok_x, 606, 200, 100))
         pygame.display.update()
         
-Ice()      
+            
     
 
 
