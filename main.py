@@ -48,6 +48,8 @@ def kies_baan(game: int):
     case 2 = dessert\n
     case 3 = ice\n
     case 4 = city\n
+    case 5 = settings\n
+    case 6 = auto kiezen\n
     '''
     match game:
         case 1:
@@ -125,33 +127,7 @@ def beginscherm():
                 elif text2.collidepoint(event.pos):
                     pygame.quit()
                     exit()
-            break
-        
-    while game == 1:
-        screen.fill(GROEN)
-        baan1()
-        pygame.display.update()
-    while game == 2:
-        screen.fill(GEEL)
-        pygame.display.update()
-    while game == 3:
-        screen.fill(LICHTBLAUW)
-        pygame.display.update()
-    while game == 4:
-        screen.fill(GRIJS)
-        pygame.display.update()
-    while game == 5:
-        screen.blit(loadingscreen, (0, 0))
-        rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
-        rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
-        text3 = screen.blit(text_3, (1158, 645))
-        pygame.display.update()
-        for event in pygame.event.get(): 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_10.collidepoint(event.pos):
-                    game = 0
-                    beginscherm = True 
-                    break
+
     
 
 
@@ -214,26 +190,6 @@ class auto:
 
 game = beginscherm()
 
-# # beginscherm loop
-# beginscherm = True
-# while beginscherm:
-#     # set ticks
-#     for event in pygame.event.get():
-#         # sluit de game af als er op het kruisje wordt geklikt
-#         if event.type == pygame.QUIT:
-#             pygame.quit()
-#             exit()
-#         # gaat naar volgende loop als er geklikt wordt
-#         if event.type == pygame.MOUSEBUTTONDOWN:
-#             beginscherm = False
-#             break
-#     # plaats achtergrondafbeelding in scherm
-#     screen.blit(loadingscreen, (0, 0))
-
-#     # update het scherm
-#     pygame.display.update()
-
-
 clock = pygame.time.Clock()
 rode_auto = auto(pygame.image.load("img/red-car.png"), 100, 100, 10, 15)
 grijze_auto = auto(pygame.image.load("img/grey-car.png"), 100, 100, 10, 12)
@@ -256,6 +212,15 @@ while game == 5:
                 game = 0
                 beginscherm = True 
                 break
+while game == 6: 
+    '''
+    auto kiezen loop
+    '''
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+    pygame.display.update()
 
 while True:
     # zorgt dat de game niet sneller dan 30 keer per seconden loopt
