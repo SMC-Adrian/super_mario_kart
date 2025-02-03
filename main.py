@@ -83,6 +83,12 @@ def beginscherm():
     global game
     beginscherm = True
     while beginscherm == True:
+        # update het scherm
+        pygame.display.update()
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
         rect_1 = pygame.draw.rect(screen, ZWART, (250.2, 95, 331, 106))
         rect_2 = pygame.draw.rect(screen, ZWART, (698.8, 95, 331, 106))
         rect_3 = pygame.draw.rect(screen, ZWART, (250.2, 254.8, 331, 106))
@@ -147,8 +153,6 @@ def beginscherm():
                     beginscherm = True 
                     break
     
-    # update het scherm
-    pygame.display.update()
 
 
 # classes
@@ -233,6 +237,25 @@ game = beginscherm()
 clock = pygame.time.Clock()
 rode_auto = auto(pygame.image.load("img/red-car.png"), 100, 100, 10, 15)
 grijze_auto = auto(pygame.image.load("img/grey-car.png"), 100, 100, 10, 12)
+
+while game == 5:
+    '''
+    settings scherm
+    ''' 
+    screen.blit(loadingscreen, (0, 0))
+    rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
+    rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
+    text3 = screen.blit(text_3, (1158, 645))
+    pygame.display.update()
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if rect_10.collidepoint(event.pos):
+                game = 0
+                beginscherm = True 
+                break
 
 while True:
     # zorgt dat de game niet sneller dan 30 keer per seconden loopt
