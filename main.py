@@ -41,6 +41,22 @@ text_3 = LETTERS.render("Return", True, WIT)
 
         
 # functies
+def kies_baan(game: int):
+    '''
+    Deze functie kies laad de baan in die bij de game hoort met een match case statement. \n
+    case 1 = baan1\n
+    case 2 = dessert\n
+    case 3 = ice\n
+    case 4 = city\n
+    '''
+    match game:
+        case 1:
+            baan1()
+        case _:
+            print("geen baan gevonden")
+            pygame.quit()
+            exit()
+
 def checkpoints_baan1():
     pygame.draw.rect(screen, WIT, (500, 50, 10, 130))
 
@@ -224,7 +240,7 @@ while True:
     # achtergrond is groen
     screen.fill(GROEN)
     # teken de baan uit banen.py
-    baan1()
+    kies_baan(2)
     checkpoints_baan1()
 
     rode_auto.teken_auto()
