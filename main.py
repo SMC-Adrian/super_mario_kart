@@ -35,9 +35,16 @@ image_2 = pygame.image.load(r"img/desert.jpeg")
 image_3 = pygame.image.load(r"img/arctic.jpeg")
 image_4 = pygame.image.load(r"img/city.jpeg")
 image_5 = pygame.image.load(r"img/settings.jpeg")
+image_6 = pygame.image.load(r"img/choosered.jpeg")
+image_7 = pygame.image.load(r"img/choosegrey.jpeg")
+image_8 = pygame.image.load(r"img/choosegreen.jpeg")
+image_9 = pygame.image.load(r"img/choosepurple.jpeg")
+image_10 = pygame.image.load(r"img/choosecar.jpeg")
 text_1 = LETTERS.render("Settings", True, WIT)
 text_2 = LETTERS.render("Quit", True, WIT)
 text_3 = LETTERS.render("Return", True, WIT)
+text_4 = LETTERS.render("Player 1:", True, DONKERBLAUW)
+text_5 = LETTERS.render("Player 2:", True, WIT)
 
         
 # functies
@@ -54,6 +61,12 @@ def kies_baan(game: int):
     match game:
         case 1:
             baan1()
+        case 2:
+            baan2()
+        case 3:
+            baan3()
+        case 4:
+            baan4()
         case _:
             print("geen baan gevonden")
             pygame.quit()
@@ -79,12 +92,12 @@ def scale_image(img, factor):
     return pygame.transform.scale(img, size)
 
 def beginscherm():
-    # plaats achtergrondafbeelding in scherm
+    global game
     screen.blit(loadingscreen, (0, 0))
     pygame.display.update()
-    global game
-    beginscherm = True
-    while beginscherm == True:
+    
+    beginscherm_actief = True
+    while beginscherm_actief:
         # update het scherm
         pygame.display.update()
         for event in pygame.event.get(): 
@@ -99,36 +112,38 @@ def beginscherm():
         rect_6 = pygame.draw.rect(screen, GRIJS, (25, 645, 117, 35))
         rect_7 = pygame.draw.rect(screen, ZWART, (1190, 640, 70, 45))
         rect_8 = pygame.draw.rect(screen, GRIJS, (1195, 645, 60, 35))
+        rect_9 = pygame.draw.rect(screen, ZWART, (484, 414.6, 312, 184))
+        
         button_1 = screen.blit(image_1, (255.2, 100))
         button_2 = screen.blit(image_2, (703.8, 100))
         button_3 = screen.blit(image_3, (255.2, 259.8))
         button_4 = screen.blit(image_4, (703.8, 259.8))
+        button_5 = screen.blit(image_10, (489, 419.6))
+        
         text1 = screen.blit(text_1, (25, 645))
         text2 = screen.blit(text_2, (1195, 645))
         pygame.display.update()
         for event in pygame.event.get():
-            # gaat naar volgende loop als er geklikt wordt
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if button_1.collidepoint(event.pos):
-                   beginscherm = False
-                   return 1
-                elif button_2.collidepoint(event.pos):
-                    beginscherm = False
+                pos = event.pos
+                if button_1.collidepoint(pos):
+                    return 1
+                elif button_2.collidepoint(pos):
                     return 2
-                elif button_3.collidepoint(event.pos):
-                    beginscherm = False
+                elif button_3.collidepoint(pos):
                     return 3
-                elif button_4.collidepoint(event.pos):
-                    beginscherm = False
+                elif button_4.collidepoint(pos):
                     return 4
-                elif text1.collidepoint(event.pos):
-                    beginscherm = False
+                elif text1.collidepoint(pos):  # Settings
                     return 5
-                elif text2.collidepoint(event.pos):
+                elif button_5.collidepoint(pos):
+                    return 6
+                elif text2.collidepoint(pos):  # Quit
                     pygame.quit()
                     exit()
-
-    
 
 
 # classes
@@ -194,66 +209,82 @@ clock = pygame.time.Clock()
 rode_auto = auto(pygame.image.load("img/red-car.png"), 100, 100, 10, 15)
 grijze_auto = auto(pygame.image.load("img/grey-car.png"), 100, 100, 10, 12)
 
-while game == 5:
-    '''
-    settings scherm
-    ''' 
-    screen.blit(loadingscreen, (0, 0))
-    rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
-    rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
-    text3 = screen.blit(text_3, (1158, 645))
-    pygame.display.update()
-    for event in pygame.event.get(): 
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if rect_10.collidepoint(event.pos):
-                game = 0
-                beginscherm = True 
-                break
-while game == 6: 
-    '''
-    auto kiezen loop
-    '''
-    for event in pygame.event.get(): 
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-    pygame.display.update()
-
 while True:
-    # zorgt dat de game niet sneller dan 30 keer per seconden loopt
     clock.tick(FPS)
-    # achtergrond is groen
-    screen.fill(GROEN)
-    # teken de baan uit banen.py
-    kies_baan(2)
-    checkpoints_baan1()
 
-    rode_auto.teken_auto()
-    grijze_auto.teken_auto()
+    if game == 5:  # Instellingen scherm
+        screen.blit(loadingscreen, (0, 0))
+        rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
+        rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
+        text3 = screen.blit(text_3, (1158, 645))
+        pygame.display.update()
 
-    keys = pygame.key.get_pressed() # komt van python documentatie
-    '''
-    gekozen voor alleen if statements zodat als je allebei de toetsen indrukt ze elkaar cancelen
-    '''
-    if keys[pygame.K_w]:
-        rode_auto.voren_auto()
-    if keys[pygame.K_s]:
-        rode_auto.achter_auto()
-    if keys[pygame.K_d]:
-        rode_auto.draai_auto(rechts=True)
-    if keys[pygame.K_a]:
-        rode_auto.draai_auto(links=True)
-    if keys[pygame.K_UP]:
-        grijze_auto.voren_auto()
-    if keys[pygame.K_DOWN]:
-        grijze_auto.achter_auto()
-    if keys[pygame.K_LEFT]:
-        grijze_auto.draai_auto(links=True)
-    if keys[pygame.K_RIGHT]:
-        grijze_auto.draai_auto(rechts=True)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.MOUSEBUTTONDOWN and rect_10.collidepoint(event.pos):
+                game = beginscherm()  # Ga terug naar beginscherm
+    
+    elif game == 6:
+        screen.blit(loadingscreen, (0,0))
+        rect_10 = pygame.draw.rect(screen, ZWART, (35, 145, 280, 140))
+        rect_11 = pygame.draw.rect(screen, ZWART, (345, 145, 280, 140))
+        rect_12 = pygame.draw.rect(screen, ZWART, (655, 145, 280, 140))
+        rect_13 = pygame.draw.rect(screen, ZWART, (965, 145, 280, 140))
+        rect_14 = pygame.draw.rect(screen, ZWART, (35, 395, 280, 140))
+        rect_15 = pygame.draw.rect(screen, ZWART, (345, 395, 280, 140))
+        rect_16 = pygame.draw.rect(screen, ZWART, (655, 395, 280, 140))
+        rect_17 = pygame.draw.rect(screen, ZWART, (965, 395, 280, 140))
+        rect_18 = pygame.draw.rect(screen, WIT, (600, 100, 125, 35))
+        rect_19 = pygame.draw.rect(screen, DONKERBLAUW, (600, 350, 125, 35))
+        rect_20 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
+        rect_21 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
+        screen.blit(text_3, (1158, 645))
+        screen.blit(text_4, (600, 100))
+        screen.blit(text_5, (600, 350))
+        screen.blit(image_6, (40, 150))
+        screen.blit(image_7, (350, 150))
+        screen.blit(image_8, (660, 150))
+        screen.blit(image_9, (970, 150))
+        screen.blit(image_6, (40, 400))
+        screen.blit(image_7, (350, 400))
+        screen.blit(image_8, (660, 400))
+        screen.blit(image_9, (970, 400))
+        pygame.display.update()
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rect_20.collidepoint(event.pos):
+                    game =beginscherm()
+        pygame.display.update()
+
+    else:
+        screen.fill(GROEN)
+        kies_baan(game)  # Laad de juiste baan
+
+        rode_auto.teken_auto()
+        grijze_auto.teken_auto()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w]: rode_auto.voren_auto()
+        if keys[pygame.K_s]: rode_auto.achter_auto()
+        if keys[pygame.K_d]: rode_auto.draai_auto(rechts=True)
+        if keys[pygame.K_a]: rode_auto.draai_auto(links=True)
+        if keys[pygame.K_UP]: grijze_auto.voren_auto()
+        if keys[pygame.K_DOWN]: grijze_auto.achter_auto()
+        if keys[pygame.K_LEFT]: grijze_auto.draai_auto(links=True)
+        if keys[pygame.K_RIGHT]: grijze_auto.draai_auto(rechts=True)
+
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
     
 
     pygame.display.update()
