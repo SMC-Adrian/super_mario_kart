@@ -20,6 +20,7 @@ LICHTBLAUW = (108, 217, 213)
 DONKERBLAUW = (21, 27, 56)
 GEEL = (255, 153, 51)
 ROOD = (255, 0, 0)
+LICHTGRIJS = (121, 121, 121)
 LETTERS = pygame.font.SysFont("arial", 30, bold=True, italic=False)
 
 game = 0
