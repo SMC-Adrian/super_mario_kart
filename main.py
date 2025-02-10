@@ -21,7 +21,14 @@ DONKERBLAUW = (21, 27, 56)
 GEEL = (255, 153, 51)
 ROOD = (255, 0, 0)
 LICHTGRIJS = (121, 121, 121)
+DONKERGRIJS = (31, 31, 31)
+BRUIN = (115, 75, 39)
 LETTERS = pygame.font.SysFont("arial", 30, bold=True, italic=False)
+
+
+
+spelen = LETTERS.render("None", True, ZWART)
+spelen2 = LETTERS.render("None", True, ZWART)
 
 game = 0
 
@@ -47,6 +54,26 @@ text_3 = LETTERS.render("Return", True, WIT)
 text_4 = LETTERS.render("Player 1:", True, DONKERBLAUW)
 text_5 = LETTERS.render("Player 2:", True, WIT)
 
+rode_auto_hitbox = rode_auto.get_rect()
+
+check2 = False
+check3 = False
+check4 = False
+check5 = False
+check6 = False
+check7 = False
+check8 = False
+check9 = False
+Ronde1 = True
+Ronde2 = False
+Ronde3 = False
+Ronde_Finish = False
+FINISHED = False
+P2_Ronde1 = True
+P2_Ronde2 = False
+P2_Ronde3 = False
+P2_Ronde_Finish = False
+P2_FINISHED = False
         
 # functies
 def kies_baan(game: int):
@@ -73,8 +100,9 @@ def kies_baan(game: int):
             pygame.quit()
             exit()
 
-def checkpoints_baan1():
-    pygame.draw.rect(screen, WIT, (500, 50, 10, 130))
+
+
+    
 
 def draai_blit(screen, image, top_left, angle):
     '''
@@ -165,6 +193,8 @@ class auto:
         self.draaisnelheid = draaisnelheid
         self.hoek = -90
         self.x, self.y = start_x, start_y
+        
+        self.rect = self.img.get_rect(topleft=(self.x, self.y))
     
     def teken_auto(self):
         '''
@@ -193,6 +223,8 @@ class auto:
         horizontaal = math.sin(radialen) * self.snelheid
         self.y -= verticaal
         self.x -= horizontaal
+        
+        self.rect.topleft = (self.x, self.y)
 
     def achter_auto(self):
         self.snelheid = min(self.snelheid + self.versnelling, self.max_snelheid)
@@ -202,16 +234,20 @@ class auto:
         horizontaal = math.sin(radialen) * self.snelheid
         self.y += verticaal
         self.x += horizontaal
+        
+        self.rect.topleft = (self.x, self.y)
     
 
 game = beginscherm()
 
 clock = pygame.time.Clock()
-rode_auto = auto(pygame.image.load("img/red-car.png"), 100, 100, 10, 15)
-grijze_auto = auto(pygame.image.load("img/grey-car.png"), 100, 100, 10, 12)
+
+rode_auto = auto(pygame.image.load("img/red-car.png"), 260, 75, 10, 15)
+grijze_auto = auto(pygame.image.load("img/grey-car.png"), 260, 105, 10, 12)
 
 while True:
     clock.tick(FPS)
+    start_tijd = pygame.time.get_ticks()
 
     if game == 5:  # Instellingen scherm
         screen.blit(loadingscreen, (0, 0))
@@ -259,15 +295,250 @@ while True:
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if rect_20.collidepoint(event.pos):
-                    game =beginscherm()
+                    game = beginscherm()
         pygame.display.update()
 
     else:
         screen.fill(GROEN)
         kies_baan(game)  # Laad de juiste baan
-
+        
+        
         rode_auto.teken_auto()
         grijze_auto.teken_auto()
+        
+        if game == 1:
+            
+            checkpoints_x_coördinaten = [1100, 1163, 1011, 735, 1115, 1115, 230, 230]
+            
+            checkpoint_hitbox2 = pygame.draw.rect(screen, DONKERGRIJS, (1100, 64, 10, 100))
+            checkpoint_hitbox3 = pygame.draw.rect(screen, DONKERGRIJS, (1163, 210, 100, 10))
+            checkpoint_hitbox4 = pygame.draw.rect(screen, DONKERGRIJS, (1011, 265, 10, 100))
+            checkpoint_hitbox5 = pygame.draw.rect(screen, DONKERGRIJS, (735, 499, 140, 10))
+            checkpoint_hitbox6 = pygame.draw.rect(screen, DONKERGRIJS, (1115, 506, 10, 100))
+            checkpoint_hitbox7 = pygame.draw.rect(screen, DONKERGRIJS, (1115, 607, 10, 99))
+            checkpoint_hitbox8 = pygame.draw.rect(screen, DONKERGRIJS, (230, 607, 10, 99))
+            checkpoint_hitbox9 = pygame.draw.rect(screen, DONKERGRIJS, (230, 64, 10, 99))
+            
+            checkpoint_hitbox = pygame.draw.rect(screen, GRIJS, (540, 64, 10, 100))
+            checkpoint = pygame.image.load(r"img\Finish Line.jpg")
+            screen.blit(checkpoint, (540, 64))
+            
+            Rondes = ["Ronde 1","Ronde2","Ronde3"]
+            
+        elif game == 2:
+        
+            checkpoint_hitbox2 = pygame.draw.rect(screen, BRUIN, (1000, 64, 10, 100))
+            checkpoint_hitbox3 = pygame.draw.rect(screen, BRUIN, (1100, 210, 100, 10))
+            checkpoint_hitbox4 = pygame.draw.rect(screen, BRUIN, (1100, 596, 100, 10))
+            checkpoint_hitbox5 = pygame.draw.rect(screen, DONKERGRIJS, (1060, 606, 10, 100))
+            checkpoint_hitbox6 = pygame.draw.rect(screen, DONKERGRIJS, (230, 170, 10, 103))
+            checkpoint_hitbox7 = pygame.draw.rect(screen, DONKERGRIJS, (130, 510, 100, 10))
+            checkpoint_hitbox8 = pygame.draw.rect(screen, DONKERGRIJS, (175, 625, 10, 75))
+            checkpoint_hitbox9 = pygame.draw.rect(screen, DONKERGRIJS, (230, 64, 10, 99))
+            
+            checkpoint_hitbox = pygame.draw.rect(screen, GRIJS, (540, 64, 10, 100))
+            checkpoint = pygame.image.load(r"img\Finish Line.jpg")
+            screen.blit(checkpoint, (540, 64))
+            
+            Rondes = ["Ronde 1","Ronde2","Ronde3"]
+        
+        elif game == 3:
+        
+            checkpoint_hitbox2 = pygame.draw.rect(screen, LICHTBLAUW, (475, 164, 10, 100))
+            checkpoint_hitbox3 = pygame.draw.rect(screen, LICHTBLAUW, (675, 64, 10, 100))
+            checkpoint_hitbox4 = pygame.draw.rect(screen, LICHTBLAUW, (875, 164, 10, 100))
+            checkpoint_hitbox5 = pygame.draw.rect(screen, LICHTBLAUW, (1075, 64, 10, 100))
+            checkpoint_hitbox6 = pygame.draw.rect(screen, LICHTBLAUW, (1130, 164, 100, 10))
+            checkpoint_hitbox7 = pygame.draw.rect(screen, LICHTBLAUW, (1130, 596, 100, 10))
+            checkpoint_hitbox8 = pygame.draw.rect(screen, LICHTBLAUW, (230, 606, 10, 100))
+            checkpoint_hitbox9 = pygame.draw.rect(screen, LICHTBLAUW, (130, 164, 100, 10))
+            
+            checkpoint_hitbox = pygame.draw.rect(screen, GRIJS, (320, 64, 10, 100))
+            checkpoint = pygame.image.load(r"img\Finish Line.jpg")
+            screen.blit(checkpoint, (320, 64))
+            
+            Rondes = ["Ronde 1","Ronde2","Ronde3"]
+        
+        elif game == 4:
+            checkpoint_hitbox2 = pygame.draw.rect(screen, DONKERGRIJS, (1020, 64, 10, 100))
+            checkpoint_hitbox3 = pygame.draw.rect(screen, DONKERGRIJS, (1130, 264, 100, 10))
+            checkpoint_hitbox4 = pygame.draw.rect(screen, DONKERGRIJS, (1130, 264, 100, 10))
+            checkpoint_hitbox5 = pygame.draw.rect(screen, DONKERGRIJS, (1130, 594, 100, 10))
+            checkpoint_hitbox6 = pygame.draw.rect(screen, DONKERGRIJS, (980, 606, 10, 100))
+            checkpoint_hitbox7 = pygame.draw.rect(screen, DONKERGRIJS, (230, 606, 10, 100))
+            checkpoint_hitbox8 = pygame.draw.rect(screen, DONKERGRIJS, (130, 335, 100, 10))
+            checkpoint_hitbox9 = pygame.draw.rect(screen, DONKERGRIJS, (130, 164, 100, 10))
+            
+            checkpoint_hitbox = pygame.draw.rect(screen, GRIJS, (320, 64, 10, 100))
+            checkpoint = pygame.image.load(r"img\Finish Line.jpg")
+            screen.blit(checkpoint, (320, 64))
+            
+            Rondes = ["Ronde 1","Ronde2","Ronde3"]
+            
+        if rode_auto.rect.colliderect(checkpoint_hitbox) & Ronde_Finish == True & check9 == True:
+            FINISHED = True
+        
+        if FINISHED == True:
+            WIN_P1 = pygame.draw.rect(screen, DONKERGRIJS, (0, 0, 1280, 720))
+            spelen = LETTERS.render("P1 GEWONNEN", True, WIT)
+            EXIT_RECT = pygame.draw.rect(screen, ROOD, (590, 360, 100, 50))
+            EXIT = LETTERS.render("EXIT", True, DONKERGRIJS)
+            screen.blit(EXIT,(605, 365))
+            if rode_auto.rect.colliderect(EXIT_RECT):
+                game = beginscherm()
+                FINISHED = False
+            
+        
+        elif rode_auto.rect.colliderect(checkpoint_hitbox) & Ronde3 == True & check9 == True: #Start Ronde 3
+            spelen = LETTERS.render(Rondes[2], True, ZWART)
+            Ronde3 = False
+            check2 = True
+            check9 = False
+            Ronde_Finish = True
+          
+         
+            
+        elif rode_auto.rect.colliderect(checkpoint_hitbox) & Ronde2 == True & check9 == True: #Start Ronde 2
+            spelen = LETTERS.render(Rondes[1], True, ZWART)
+            Ronde2 = False
+            Ronde3 = True
+            check2 = True
+            check9 = False
+            
+        elif rode_auto.rect.colliderect(checkpoint_hitbox) & Ronde1 == True: #Start Ronde 1
+            spelen = LETTERS.render(Rondes[0], True, ZWART)
+            Ronde1 = False
+            Ronde2 = True
+            check2 = True
+            
+            
+        if rode_auto.rect.colliderect(checkpoint_hitbox2) & check2 == True:
+            spelen = LETTERS.render("2", True, ZWART)
+            check3 = True
+            
+        if rode_auto.rect.colliderect(checkpoint_hitbox3) & check3 == True:
+            spelen = LETTERS.render("3", True, ZWART)
+            check4 = True
+            
+        if rode_auto.rect.colliderect(checkpoint_hitbox4) & check4 == True:
+            spelen = LETTERS.render("4", True, ZWART)
+            check5 = True
+            
+        if rode_auto.rect.colliderect(checkpoint_hitbox5) & check5 == True:
+            spelen = LETTERS.render("5", True, ZWART)
+            check6 = True
+            
+        if rode_auto.rect.colliderect(checkpoint_hitbox6) & check6 == True:
+            spelen = LETTERS.render("6", True, ZWART)
+            check7 = True
+        
+        if rode_auto.rect.colliderect(checkpoint_hitbox7) & check7 == True:
+            spelen = LETTERS.render("7", True, ZWART)
+            check8 = True
+            
+        if rode_auto.rect.colliderect(checkpoint_hitbox8) & check8 == True:
+            spelen = LETTERS.render("8", True, ZWART)
+            check9 = True
+        
+        if rode_auto.rect.colliderect(checkpoint_hitbox9) & check9 == True:
+            spelen = LETTERS.render("9", True, ZWART)
+            Ronde2 = True
+            check1 = False
+            check2 = False
+            check3 = False
+            check4 = False
+            check5 = False
+            check6 = False
+            check7 = False
+            check8 = False
+            
+        screen.blit(spelen, (0,0))
+    
+        if grijze_auto.rect.colliderect(checkpoint_hitbox) & P2_Ronde_Finish == True & check9 == True:
+            P2_FINISHED = True
+        
+        if P2_FINISHED == True:
+            WIN_P2 = pygame.draw.rect(screen, DONKERGRIJS, (0, 0, 1280, 720))
+            spelen2 = LETTERS.render("P2 GEWONNEN", True, ZWART)
+            EXIT_RECT = pygame.draw.rect(screen, ROOD, (590, 360, 100, 50))
+            EXIT = LETTERS.render("EXIT", True, DONKERGRIJS)
+            screen.blit(EXIT,(605, 365))
+            if grijze_auto.rect.colliderect(EXIT_RECT):
+                game = beginscherm()
+                P2_FINISHED = False
+            
+        
+        elif grijze_auto.rect.colliderect(checkpoint_hitbox) & P2_Ronde3 == True & check9 == True: #Start Ronde 3
+            spelen2 = LETTERS.render(Rondes[2], True, ZWART)
+            P2_Ronde3 = False
+            check2 = True
+            check9 = False
+            P2_Ronde_Finish = True
+          
+         
+            
+        elif grijze_auto.rect.colliderect(checkpoint_hitbox) & P2_Ronde2 == True & check9 == True: #Start Ronde 2
+            spelen2 = LETTERS.render(Rondes[1], True, ZWART)
+            P2_Ronde2 = False
+            P2_Ronde3 = True
+            check2 = True
+            check9 = False
+            
+        elif grijze_auto.rect.colliderect(checkpoint_hitbox) & P2_Ronde1 == True: #Start Ronde 1
+            spelen2 = LETTERS.render(Rondes[0], True, ZWART)
+            P2_Ronde1 = False
+            Ronde2 = True
+            check2 = True
+            
+            
+        if grijze_auto.rect.colliderect(checkpoint_hitbox2) & check2 == True:
+            spelen2 = LETTERS.render("2", True, ZWART)
+            check3 = True
+            
+        if grijze_auto.rect.colliderect(checkpoint_hitbox3) & check3 == True:
+            spelen2 = LETTERS.render("3", True, ZWART)
+            check4 = True
+            
+        if grijze_auto.rect.colliderect(checkpoint_hitbox4) & check4 == True:
+            spelen2 = LETTERS.render("4", True, ZWART)
+            check5 = True
+            
+        if grijze_auto.rect.colliderect(checkpoint_hitbox5) & check5 == True:
+            spelen2 = LETTERS.render("5", True, ZWART)
+            check6 = True
+            
+        if grijze_auto.rect.colliderect(checkpoint_hitbox6) & check6 == True:
+            spelen2 = LETTERS.render("6", True, ZWART)
+            check7 = True
+        
+        if grijze_auto.rect.colliderect(checkpoint_hitbox7) & check7 == True:
+            spelen2 = LETTERS.render("7", True, ZWART)
+            check8 = True
+            
+        if grijze_auto.rect.colliderect(checkpoint_hitbox8) & check8 == True:
+            spelen2 = LETTERS.render("8", True, ZWART)
+            check9 = True
+        
+        if grijze_auto.rect.colliderect(checkpoint_hitbox9) & check9 == True:
+            spelen2 = LETTERS.render("9", True, ZWART)
+            P2_Ronde2 = True
+            check1 = False
+            check2 = False
+            check3 = False
+            check4 = False
+            check5 = False
+            check6 = False
+            check7 = False
+            check8 = False
+            
+        screen.blit(spelen2, (1000,0))
+            
+        
+            
+        rode_auto.teken_auto()
+        grijze_auto.teken_auto()
+        
+        
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]: rode_auto.voren_auto()
@@ -278,16 +549,14 @@ while True:
         if keys[pygame.K_DOWN]: grijze_auto.achter_auto()
         if keys[pygame.K_LEFT]: grijze_auto.draai_auto(links=True)
         if keys[pygame.K_RIGHT]: grijze_auto.draai_auto(rechts=True)
-
+        
         pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-
-    
-
+                
     pygame.display.update()
 
     for event in pygame.event.get():
