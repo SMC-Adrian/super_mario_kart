@@ -31,7 +31,6 @@ spelen = LETTERS.render("None", True, ZWART)
 spelen2 = LETTERS.render("None", True, ZWART)
 
 game = 0
-
 FPS = 30
 
 # laad afbeeldingen en tekst
@@ -53,9 +52,6 @@ text_2 = LETTERS.render("Quit", True, WIT)
 text_3 = LETTERS.render("Return", True, WIT)
 text_4 = LETTERS.render("Player 1:", True, DONKERBLAUW)
 text_5 = LETTERS.render("Player 2:", True, WIT)
-text_6 = LETTERS.render("Muziek:", True, WIT)
-text_7 = LETTERS.render("AAN", True, WIT)
-text_8 = LETTERS.render("UIT", True, WIT)
 
 rode_auto_hitbox = rode_auto.get_rect()
 
@@ -123,9 +119,6 @@ def scale_image(img, factor):
     size = round(img.get_width() * factor), round(img.get_height() * factor)
     return pygame.transform.scale(img, size)
 
-music = pygame.mixer.music.load("muziekjes/achtergrondmuziekje.mp3")
-pygame.mixer.music.play(-1)
-
 def beginscherm():
     global game
     screen.blit(loadingscreen, (0, 0))
@@ -163,19 +156,20 @@ def beginscherm():
                 pygame.quit()
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if button_1.collidepoint(event.pos):
+                pos = event.pos
+                if button_1.collidepoint(pos):
                     return 1
-                elif button_2.collidepoint(event.pos):
+                elif button_2.collidepoint(pos):
                     return 2
-                elif button_3.collidepoint(event.pos):
+                elif button_3.collidepoint(pos):
                     return 3
-                elif button_4.collidepoint(event.pos):
+                elif button_4.collidepoint(pos):
                     return 4
-                elif text1.collidepoint(event.pos):  # Settings
+                elif text1.collidepoint(pos):  # Settings
                     return 5
-                elif button_5.collidepoint(event.pos):
+                elif button_5.collidepoint(pos):
                     return 6
-                elif text2.collidepoint(event.pos):  # Quit
+                elif text2.collidepoint(pos):  # Quit
                     pygame.quit()
                     exit()
 
@@ -247,18 +241,13 @@ game = beginscherm()
 
 clock = pygame.time.Clock()
 
-rode_auto = auto(pygame.image.load("img/red-car.png"), 260, 75, 10, 10)
-grijze_auto = auto(pygame.image.load("img/grey-car.png"), 260, 105, 10, 10)
+lengte_auto1 = 260
+lengte_auto2 = 260
+breedte_auto1 = 75
+breedte_auto2 = 105
 
-groene_auto_1 = auto(pygame.image.load("img/green-car.png"), 100, 100, 10, 15)
-rode_auto_1 = auto(pygame.image.load("img/red-car.png"), 100, 100, 10, 15)
-grijze_auto_1 = auto(pygame.image.load("img/grey-car.png"), 100, 100, 10, 12)
-paarse_auto_1 = auto(pygame.image.load("img/purple-car.png"), 100, 100, 10, 12)
-
-groene_auto_2 = auto(pygame.image.load("img/green-car.png"), 100, 100, 10, 15)
-rode_auto_2 = auto(pygame.image.load("img/red-car.png"), 100, 100, 10, 15)
-grijze_auto_2 = auto(pygame.image.load("img/grey-car.png"), 100, 100, 10, 12)
-paarse_auto_2 = auto(pygame.image.load("img/purple-car.png"), 100, 100, 10, 12)
+rode_auto = auto(pygame.image.load("img/red-car.png"), lengte_auto1, breedte_auto1, 10, 15)
+grijze_auto = auto(pygame.image.load("img/grey-car.png"), lengte_auto2, breedte_auto2, 10, 12)
 
 while True:
     clock.tick(FPS)
@@ -268,35 +257,17 @@ while True:
         screen.blit(loadingscreen, (0, 0))
         rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
         rect_10 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
-        rect_11 = pygame.draw.rect(screen, ZWART, (580, 95, 120, 45))
-        rect_12 = pygame.draw.rect(screen, GRIJS, (585, 100, 110, 35))
-        rect_13 = pygame.draw.rect(screen, ZWART, (557.5, 145, 75, 45))
-        rect_14 = pygame.draw.rect(screen, GRIJS, (562.5, 150, 65, 35))
-        rect_15 = pygame.draw.rect(screen, ZWART, (655, 145, 60, 45))
-        rect_16 = pygame.draw.rect(screen, GRIJS, (660, 150, 50, 35))
-        
         text3 = screen.blit(text_3, (1158, 645))
-        text4 = screen.blit(text_6, (585, 100))
-        text5 = screen.blit(text_7, (562.5, 150))
-        text6 = screen.blit(text_8, (660, 150))
         pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_10.collidepoint(event.pos):
-                    game = beginscherm()  # Ga terug naar beginscherm
-                elif rect_14.collidepoint(event.pos):
-                    pygame.mixer.music.unpause()
-                elif rect_16.collidepoint(event.pos):
-                    pygame.mixer.music.pause()
-                elif rect_16.collidepoint(event.pos):
-                    pygame.mixer.music.pause()
+            if event.type == pygame.MOUSEBUTTONDOWN and rect_10.collidepoint(event.pos):
+                game = beginscherm()  # Ga terug naar beginscherm
     
     elif game == 6:
-        #kies auto scherm
         screen.blit(loadingscreen, (0,0))
         rect_10 = pygame.draw.rect(screen, ZWART, (35, 145, 280, 140))
         rect_11 = pygame.draw.rect(screen, ZWART, (345, 145, 280, 140))
@@ -313,14 +284,14 @@ while True:
         screen.blit(text_3, (1158, 645))
         screen.blit(text_4, (600, 100))
         screen.blit(text_5, (600, 350))
-        p1_red = screen.blit(image_6, (40, 150))
-        p1_grey = screen.blit(image_7, (350, 150))
-        p1_green = screen.blit(image_8, (660, 150))
-        p1_purple = screen.blit(image_9, (970, 150))
-        p2_red = screen.blit(image_6, (40, 400))
-        p2_grey = screen.blit(image_7, (350, 400))
-        p2_green = screen.blit(image_8, (660, 400))
-        p2_purple = screen.blit(image_9, (970, 400))
+        screen.blit(image_6, (40, 150))
+        screen.blit(image_7, (350, 150))
+        screen.blit(image_8, (660, 150))
+        screen.blit(image_9, (970, 150))
+        screen.blit(image_6, (40, 400))
+        screen.blit(image_7, (350, 400))
+        screen.blit(image_8, (660, 400))
+        screen.blit(image_9, (970, 400))
         pygame.display.update()
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
@@ -329,31 +300,12 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if rect_20.collidepoint(event.pos):
                     game = beginscherm()
-                elif p1_red.collidepoint(event.pos):
-                    rode_auto = rode_auto_1
-                elif p1_grey.collidepoint(event.pos):
-                    rode_auto = grijze_auto_1
-                elif p1_green.collidepoint(event.pos):
-                    rode_auto = groene_auto_1
-                elif p1_purple.collidepoint(event.pos):
-                     rode_auto = paarse_auto_1
-                elif p2_red.collidepoint(event.pos):
-                    grijze_auto = rode_auto_2
-                elif p2_grey.collidepoint(event.pos):
-                    grijze_auto = grijze_auto_2
-                elif p2_green.collidepoint(event.pos):
-                    grijze_auto = groene_auto_2
-                elif p2_purple.collidepoint(event.pos):
-                    grijze_auto = paarse_auto_2
         pygame.display.update()
 
     else:
         screen.fill(GROEN)
         kies_baan(game)  # Laad de juiste baan
         
-        
-        rode_auto.teken_auto()
-        grijze_auto.teken_auto()
         
         if game == 1:
             
@@ -435,8 +387,32 @@ while True:
             screen.blit(EXIT,(605, 365))
             if rode_auto.rect.colliderect(EXIT_RECT):
                 game = beginscherm()
+                check2 = False
+                check3 = False
+                check4 = False
+                check5 = False
+                check6 = False
+                check7 = False
+                check8 = False
+                check9 = False
+                Ronde1 = True
+                Ronde2 = False
+                Ronde3 = False
+                Ronde_Finish = False
                 FINISHED = False
-            
+                P2_Ronde1 = True
+                P2_Ronde2 = False
+                P2_Ronde3 = False
+                P2_Ronde_Finish = False
+                lengte_auto1 = 260
+                lengte_auto2 = 260
+                breedte_auto1 = 75
+                breedte_auto2 = 105
+                rode_auto = auto(pygame.image.load("img/red-car.png"), lengte_auto1, breedte_auto1, 10, 15)
+                grijze_auto = auto(pygame.image.load("img/grey-car.png"), lengte_auto2, breedte_auto2, 10, 12)
+                P2_FINISHED = False
+                spelen = LETTERS.render("---", True, ZWART)
+                spelen2 = LETTERS.render("---", True, ZWART)
         
         elif rode_auto.rect.colliderect(checkpoint_hitbox) & Ronde3 == True & check9 == True: #Start Ronde 3
             spelen = LETTERS.render(Rondes[2], True, ZWART)
@@ -508,15 +484,40 @@ while True:
         
         if P2_FINISHED == True:
             WIN_P2 = pygame.draw.rect(screen, DONKERGRIJS, (0, 0, 1280, 720))
-            spelen2 = LETTERS.render("P2 GEWONNEN", True, ZWART)
+            spelen2 = LETTERS.render("P2 GEWONNEN", True, WIT)
             EXIT_RECT = pygame.draw.rect(screen, ROOD, (590, 360, 100, 50))
             EXIT = LETTERS.render("EXIT", True, DONKERGRIJS)
             screen.blit(EXIT,(605, 365))
             if grijze_auto.rect.colliderect(EXIT_RECT):
                 game = beginscherm()
+                check2 = False
+                check3 = False
+                check4 = False
+                check5 = False
+                check6 = False
+                check7 = False
+                check8 = False
+                check9 = False
+                Ronde1 = True
+                Ronde2 = False
+                Ronde3 = False
+                Ronde_Finish = False
+                FINISHED = False
+                P2_Ronde1 = True
+                P2_Ronde2 = False
+                P2_Ronde3 = False
+                P2_Ronde_Finish = False
+                lengte_auto1 = 260
+                lengte_auto2 = 260
+                breedte_auto1 = 75
+                breedte_auto2 = 105
+                rode_auto = auto(pygame.image.load("img/red-car.png"), lengte_auto1, breedte_auto1, 10, 15)
+                grijze_auto = auto(pygame.image.load("img/grey-car.png"), lengte_auto2, breedte_auto2, 10, 12)
                 P2_FINISHED = False
+                spelen = LETTERS.render("---", True, ZWART)
+                spelen2 = LETTERS.render("---", True, ZWART)
+                
             
-        
         elif grijze_auto.rect.colliderect(checkpoint_hitbox) & P2_Ronde3 == True & check9 == True: #Start Ronde 3
             spelen2 = LETTERS.render(Rondes[2], True, ZWART)
             P2_Ronde3 = False
@@ -582,11 +583,8 @@ while True:
             
         screen.blit(spelen2, (1000,0))
             
-        
-            
         rode_auto.teken_auto()
         grijze_auto.teken_auto()
-        
         
 
         keys = pygame.key.get_pressed()
