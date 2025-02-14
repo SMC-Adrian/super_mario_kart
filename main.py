@@ -1,7 +1,13 @@
+'''
+rode auto is de variabele voor de eerste auto en het maakt niet uit welke kleur hij heeft. 
+en datzelfde voor grijs bij auto 2.
+'''
+
 import pygame 
 from sys import exit
 import math
 from includes.banen import *
+import json
 
 # initialiseer pygame
 pygame.init()
@@ -37,7 +43,10 @@ clock = pygame.time.Clock()
 # laad afbeeldingen en tekst
 loadingscreen = pygame.image.load(r"img/loadingscreen_16_9.jpg") # deze afbeelding is door chatgpt gegenereed met de prompts: generate a image for the front of a small 2d racing game without any text using pixelart - Verbeeld an image in this style with 1280 by 720 pixels - only make a loadingscreen without side bars
 car1 = pygame.image.load(r"img/car1.webp")
-rode_auto = pygame.image.load(r"img/red-car.png")
+afbeelding1 = rode_auto_afbeelding = pygame.image.load(r"img/red-car.png")
+groene_auto_afbeelding = pygame.image.load(r"img/green-car.png")
+afbeelding2 = grijze_auto_afbeelding = pygame.image.load(r"img/grey-car.png")
+paarse_auto_afbeelding = pygame.image.load(r"img/purple-car.png")
 image_1 = pygame.image.load(r"img/grasland.jpeg")
 image_2 = pygame.image.load(r"img/desert.jpeg")
 image_3 = pygame.image.load(r"img/arctic.jpeg")
@@ -57,7 +66,7 @@ text_6 = LETTERS.render("Muziek:", True, WIT)
 text_7 = LETTERS.render("AAN", True, WIT)
 text_8 = LETTERS.render("UIT", True, WIT)
 
-rode_auto_hitbox = rode_auto.get_rect()
+rode_auto_hitbox = rode_auto_afbeelding.get_rect()
 
 check2 = False
 check3 = False
@@ -248,18 +257,83 @@ lengte_auto2 = 260
 breedte_auto1 = 75
 breedte_auto2 = 105
 
-rode_auto = auto(pygame.image.load("img/red-car.png"), lengte_auto1, breedte_auto1, 10, 10)
-grijze_auto = auto(pygame.image.load("img/grey-car.png"), lengte_auto2, breedte_auto2, 10, 10)
+while game == 6:
+    #kies auto scherm
+    screen.blit(loadingscreen, (0,0))
+    rect_10 = pygame.draw.rect(screen, ZWART, (35, 145, 280, 140))
+    rect_11 = pygame.draw.rect(screen, ZWART, (345, 145, 280, 140))
+    rect_12 = pygame.draw.rect(screen, ZWART, (655, 145, 280, 140))
+    rect_13 = pygame.draw.rect(screen, ZWART, (965, 145, 280, 140))
+    rect_14 = pygame.draw.rect(screen, ZWART, (35, 395, 280, 140))
+    rect_15 = pygame.draw.rect(screen, ZWART, (345, 395, 280, 140))
+    rect_16 = pygame.draw.rect(screen, ZWART, (655, 395, 280, 140))
+    rect_17 = pygame.draw.rect(screen, ZWART, (965, 395, 280, 140))
+    rect_18 = pygame.draw.rect(screen, WIT, (600, 100, 125, 35))
+    rect_19 = pygame.draw.rect(screen, DONKERBLAUW, (600, 350, 125, 35))
+    rect_20 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
+    rect_21 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
+    screen.blit(text_3, (1158, 645))
+    screen.blit(text_4, (600, 100))
+    screen.blit(text_5, (600, 350))
+    p1_red = screen.blit(image_6, (40, 150))
+    p1_grey = screen.blit(image_7, (350, 150))
+    p1_green = screen.blit(image_8, (660, 150))
+    p1_purple = screen.blit(image_9, (970, 150))
+    p2_red = screen.blit(image_6, (40, 400))
+    p2_grey = screen.blit(image_7, (350, 400))
+    p2_green = screen.blit(image_8, (660, 400))
+    p2_purple = screen.blit(image_9, (970, 400))
+    pygame.display.update()
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if rect_20.collidepoint(event.pos):
+                game = beginscherm()
+                break
+            elif p1_red.collidepoint(event.pos):
+                afbeelding1 = rode_auto_afbeelding
+                # print("rode auto gekozen")
+            elif p1_grey.collidepoint(event.pos):
+                afbeelding1 = grijze_auto_afbeelding
+                # print("grijze auto gekozen")
+            elif p1_green.collidepoint(event.pos):
+                afbeelding1 = groene_auto_afbeelding
+                # print("groene auto gekozen")
+            elif p1_purple.collidepoint(event.pos):
+                afbeelding1 = paarse_auto_afbeelding
+                # print("paarse auto gekozen")
+            elif p2_red.collidepoint(event.pos):
+                afbeelding2 = rode_auto_afbeelding
+                # print("rode auto gekozen")
+            elif p2_grey.collidepoint(event.pos):
+                afbeelding2 = grijze_auto_afbeelding
+                # print("grijze auto gekozen")
+            elif p2_green.collidepoint(event.pos):
+                afbeelding2 = groene_auto_afbeelding
+                # print("groene auto gekozen")
+            elif p2_purple.collidepoint(event.pos):
+                afbeelding2 = paarse_auto_afbeelding
+                # print("paarse auto gekozen")
+    pygame.display.update()
 
-groene_auto_1 = auto(pygame.image.load("img/green-car.png"), 260, 75, 10, 10)
-rode_auto_1 = auto(pygame.image.load("img/red-car.png"), 260, 75, 10, 10)
-grijze_auto_1 = auto(pygame.image.load("img/grey-car.png"), 260, 75, 10, 10)
-paarse_auto_1 = auto(pygame.image.load("img/purple-car.png"), 260, 75, 10, 10)
+if afbeelding1: 
+    rode_auto = auto(afbeelding1, lengte_auto1, breedte_auto1, 10, 10)
+if afbeelding2:
+    grijze_auto = auto(afbeelding2, lengte_auto2, breedte_auto2, 10, 10)
 
-groene_auto_2 = auto(pygame.image.load("img/green-car.png"), 260, 105, 10, 10)
-rode_auto_2 = auto(pygame.image.load("img/red-car.png"), 260, 105, 10, 10)
-grijze_auto_2 = auto(pygame.image.load("img/grey-car.png"), 260, 105, 10, 10)
-paarse_auto_2 = auto(pygame.image.load("img/purple-car.png"), 260, 105, 10, 10)
+# groene_auto_1 = auto(pygame.image.load("img/green-car.png"), 260, 75, 10, 10)
+# rode_auto_1 = auto(pygame.image.load("img/red-car.png"), 260, 75, 10, 10)
+# grijze_auto_1 = auto(pygame.image.load("img/grey-car.png"), 260, 75, 10, 10)
+# paarse_auto_1 = auto(pygame.image.load("img/purple-car.png"), 260, 75, 10, 10)
+
+# groene_auto_2 = auto(pygame.image.load("img/green-car.png"), 260, 105, 10, 10)
+# rode_auto_2 = auto(pygame.image.load("img/red-car.png"), 260, 105, 10, 10)
+# grijze_auto_2 = auto(pygame.image.load("img/grey-car.png"), 260, 105, 10, 10)
+# paarse_auto_2 = auto(pygame.image.load("img/purple-car.png"), 260, 105, 10, 10)
+
+auto1 = auto(rode_auto_afbeelding, lengte_auto1, breedte_auto1, 10, 10)
 
 start_tijd = clock.get_time()
 while True:
@@ -295,58 +369,6 @@ while True:
                     pygame.mixer.music.pause()
                 elif rect_16.collidepoint(event.pos):
                     pygame.mixer.music.pause()
-    
-    elif game == 6:
-        #kies auto scherm
-        screen.blit(loadingscreen, (0,0))
-        rect_10 = pygame.draw.rect(screen, ZWART, (35, 145, 280, 140))
-        rect_11 = pygame.draw.rect(screen, ZWART, (345, 145, 280, 140))
-        rect_12 = pygame.draw.rect(screen, ZWART, (655, 145, 280, 140))
-        rect_13 = pygame.draw.rect(screen, ZWART, (965, 145, 280, 140))
-        rect_14 = pygame.draw.rect(screen, ZWART, (35, 395, 280, 140))
-        rect_15 = pygame.draw.rect(screen, ZWART, (345, 395, 280, 140))
-        rect_16 = pygame.draw.rect(screen, ZWART, (655, 395, 280, 140))
-        rect_17 = pygame.draw.rect(screen, ZWART, (965, 395, 280, 140))
-        rect_18 = pygame.draw.rect(screen, WIT, (600, 100, 125, 35))
-        rect_19 = pygame.draw.rect(screen, DONKERBLAUW, (600, 350, 125, 35))
-        rect_20 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
-        rect_21 = pygame.draw.rect(screen, GRIJS, (1158, 645, 97, 35))
-        screen.blit(text_3, (1158, 645))
-        screen.blit(text_4, (600, 100))
-        screen.blit(text_5, (600, 350))
-        p1_red = screen.blit(image_6, (40, 150))
-        p1_grey = screen.blit(image_7, (350, 150))
-        p1_green = screen.blit(image_8, (660, 150))
-        p1_purple = screen.blit(image_9, (970, 150))
-        p2_red = screen.blit(image_6, (40, 400))
-        p2_grey = screen.blit(image_7, (350, 400))
-        p2_green = screen.blit(image_8, (660, 400))
-        p2_purple = screen.blit(image_9, (970, 400))
-        pygame.display.update()
-        for event in pygame.event.get(): 
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_20.collidepoint(event.pos):
-                    game = beginscherm()
-                elif p1_red.collidepoint(event.pos):
-                    rode_auto = rode_auto_1
-                elif p1_grey.collidepoint(event.pos):
-                    rode_auto = grijze_auto_1
-                elif p1_green.collidepoint(event.pos):
-                    rode_auto = groene_auto_1
-                elif p1_purple.collidepoint(event.pos):
-                     rode_auto = paarse_auto_1
-                elif p2_red.collidepoint(event.pos):
-                    grijze_auto = rode_auto_2
-                elif p2_grey.collidepoint(event.pos):
-                    grijze_auto = grijze_auto_2
-                elif p2_green.collidepoint(event.pos):
-                    grijze_auto = groene_auto_2
-                elif p2_purple.collidepoint(event.pos):
-                    grijze_auto = paarse_auto_2
-        pygame.display.update()
 
     else:
         screen.fill(GROEN)
