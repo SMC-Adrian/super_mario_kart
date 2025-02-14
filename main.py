@@ -30,8 +30,9 @@ LETTERS = pygame.font.SysFont("arial", 30, bold=True, italic=False)
 spelen = LETTERS.render("None", True, ZWART)
 spelen2 = LETTERS.render("None", True, ZWART)
 
-game = 0
 FPS = 30
+clock = pygame.time.Clock()
+
 
 # laad afbeeldingen en tekst
 loadingscreen = pygame.image.load(r"img/loadingscreen_16_9.jpg") # deze afbeelding is door chatgpt gegenereed met de prompts: generate a image for the front of a small 2d racing game without any text using pixelart - Verbeeld an image in this style with 1280 by 720 pixels - only make a loadingscreen without side bars
@@ -122,16 +123,10 @@ def scale_image(img, factor):
 def beginscherm():
     global game
     screen.blit(loadingscreen, (0, 0))
-    pygame.display.update()
     
     beginscherm_actief = True
     while beginscherm_actief:
-        # update het scherm
-        pygame.display.update()
-        for event in pygame.event.get(): 
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+        clock.tick(FPS)
         rect_1 = pygame.draw.rect(screen, ZWART, (250.2, 95, 331, 106))
         rect_2 = pygame.draw.rect(screen, ZWART, (698.8, 95, 331, 106))
         rect_3 = pygame.draw.rect(screen, ZWART, (250.2, 254.8, 331, 106))
@@ -167,7 +162,7 @@ def beginscherm():
                     return 4
                 elif text1.collidepoint(pos):  # Settings
                     return 5
-                elif button_5.collidepoint(pos):
+                elif button_5.collidepoint(pos): # Auto kiezen
                     return 6
                 elif text2.collidepoint(pos):  # Quit
                     pygame.quit()
@@ -239,7 +234,6 @@ class auto:
 
 game = beginscherm()
 
-clock = pygame.time.Clock()
 
 lengte_auto1 = 260
 lengte_auto2 = 260
@@ -249,10 +243,10 @@ breedte_auto2 = 105
 rode_auto = auto(pygame.image.load("img/red-car.png"), lengte_auto1, breedte_auto1, 10, 15)
 grijze_auto = auto(pygame.image.load("img/grey-car.png"), lengte_auto2, breedte_auto2, 10, 12)
 
+start_tijd = clock.get_time()
 while True:
     clock.tick(FPS)
-    start_tijd = pygame.time.get_ticks()
-
+    tijd = clock.get_time()
     if game == 5:  # Instellingen scherm
         screen.blit(loadingscreen, (0, 0))
         rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
@@ -267,7 +261,7 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN and rect_10.collidepoint(event.pos):
                 game = beginscherm()  # Ga terug naar beginscherm
     
-    elif game == 6:
+    elif game == 6: # Auto kiezen
         screen.blit(loadingscreen, (0,0))
         rect_10 = pygame.draw.rect(screen, ZWART, (35, 145, 280, 140))
         rect_11 = pygame.draw.rect(screen, ZWART, (345, 145, 280, 140))
@@ -305,8 +299,8 @@ while True:
     else:
         screen.fill(GROEN)
         kies_baan(game)  # Laad de juiste baan
-        
-        
+        print(f"starttijd = {start_tijd}")
+        print(f"current time = {tijd}")
         if game == 1:
             
             checkpoints_x_coördinaten = [1100, 1163, 1011, 735, 1115, 1115, 230, 230]
@@ -321,7 +315,7 @@ while True:
             checkpoint_hitbox9 = pygame.draw.rect(screen, DONKERGRIJS, (230, 64, 10, 99))
             
             checkpoint_hitbox = pygame.draw.rect(screen, GRIJS, (540, 64, 10, 100))
-            checkpoint = pygame.image.load(r"img\Finish Line.jpg")
+            checkpoint = pygame.image.load(r"img/Finish Line.jpg")
             screen.blit(checkpoint, (540, 64))
             
             Rondes = ["Ronde 1","Ronde2","Ronde3"]
