@@ -335,10 +335,10 @@ if afbeelding2:
 
 auto1 = auto(rode_auto_afbeelding, lengte_auto1, breedte_auto1, 10, 10)
 
-start_tijd = clock.get_time()
+# start_tijd = clock.get_time()
 while True:
     clock.tick(FPS)
-    tijd = clock.get_time()
+    # tijd = clock.get_time()
     if game == 5:  # Instellingen scherm
         screen.blit(loadingscreen, (0, 0))
         rect_9 = pygame.draw.rect(screen, ZWART, (1153, 640, 107, 45))
@@ -373,8 +373,6 @@ while True:
     else:
         screen.fill(GROEN)
         kies_baan(game)  # Laad de juiste baan
-        print(f"starttijd = {start_tijd}")
-        print(f"current time = {tijd}")
         if game == 1:
             
             checkpoints_x_coördinaten = [1100, 1163, 1011, 735, 1115, 1115, 230, 230]
