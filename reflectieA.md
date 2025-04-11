@@ -30,8 +30,8 @@ We vonden dit een goede uitdagende opdracht die paste bij onze vaardigheden.
 - Het samenwerken aspect ging zo nu en dan lastig, want er waren een paar onduidelijke communicaties waardoor sommige dingen dubbel of niet werden gedaan.
 - Ik. Ik deed vrijwel alles totaal anders dan Adrian en Olle, wat ervoor zorgde dat er veel meer communicatie nodig was dan anders.
 
-  ## Mening
-  Ondanks de problemen vond ik het een erg leuk project. Er is hard gewerkt, het was gezellig, en er was een leuk achtergrond muziekje.
-  Dit allen zorgde uiteindelijk voor een hartstikke goed eindproduct, en dat zorgt voor nog meer plezier uit de game, want daardoor
-  kan je er later nog van nagenieten door de game te spelen. Helaas is mijn schoollaptop te slecht om het spel te spelen met meer dan
-  3 FPS, dus is dit voor mij geen mogelijkheid... 
+## Mening
+Ondanks de problemen vond ik het een erg leuk project. Er is hard gewerkt, het was gezellig, en er was een leuk achtergrond muziekje.
+Dit allen zorgde uiteindelijk voor een hartstikke goed eindproduct, en dat zorgt voor nog meer plezier uit de game, want daardoor
+kan je er later nog van nagenieten door de game te spelen. Helaas is mijn schoollaptop te slecht om het spel te spelen met meer dan
+3 FPS, dus is dit voor mij geen mogelijkheid... 
